@@ -1,35 +1,35 @@
 package auth
 
 import (
-	"testing"
 	"net/http"
+	"testing"
 )
 
 func TestGetAPIKey(t *testing.T) {
-	tests := []struct{
-		name		string
-		headerValue	string
-		expectAPIKey string 
+	tests := []struct {
+		name         string
+		headerValue  string
+		expectAPIKey string
 		expectError  bool
 	}{
 		{
-			name:	"valid header",
-			headerValue: "ApiKey abcd1234",
+			name:         "valid header",
+			headerValue:  "ApiKey abcd1234",
 			expectAPIKey: "abcd1234",
-			expectError: false,
+			expectError:  false,
 		},
 		{
-			name: "missing header",
+			name:        "missing header",
 			headerValue: "",
 			expectError: true,
 		},
 		{
-			name: "wrong header",
+			name:        "wrong header",
 			headerValue: "Bearer abcdefg1234",
 			expectError: true,
 		},
 		{
-			name: "missing api key",
+			name:        "missing api key",
 			headerValue: "ApiKey",
 			expectError: true,
 		},
@@ -47,7 +47,7 @@ func TestGetAPIKey(t *testing.T) {
 			if testCase.expectError {
 				if err == nil {
 					t.Error("expect error but got nil")
-		
+
 				}
 				return
 			}
@@ -59,7 +59,7 @@ func TestGetAPIKey(t *testing.T) {
 			if apiKey != testCase.expectAPIKey {
 				t.Errorf("expect apikey: %s, got: %s", testCase.expectAPIKey, apiKey)
 			}
-		
+
 		})
 	}
 }
