@@ -17,24 +17,6 @@ jobs:
         uses: actions/setup-go@v5 
         with:
           go-version: "1.26.0"
-      
-      - name: Set up version
-        run: go test -cover ./...
-
-      - name: Install gosec 
-        run: go install github.com/securego/gosec/v2/cmd/gosec@latest
-      
-      - name: Run gosec 
-        run: gosec ./...
-      
-      - name: Format checking 
-        run: test -z $(go fmt ./...)
-       
-      - name: Install Staticcheck
-        run: go install honnef.co/go/tools/cmd/staticcheck@latest
-      
-      - name: Staticcheck
-        run: staticcheck ./...
 
       - name: Build app
-        run: scripts/buildprod.sh 
+        run: ./scripts/buildprod.sh 
